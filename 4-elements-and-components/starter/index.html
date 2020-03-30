@@ -87,11 +87,15 @@
       // Create a component named "App"
       // Have it return a Fragment with the Header and List components inside of it
 
+      function App() {
+        return React.createElement(React.Fragment, {}, Header(), List());
+      }
+
       ReactDOM.render(
         // Place your element variable or component function call here to test
         // pEl,
         // Header(),
-        List(),
+        App(),
         document.getElementById("root")
       );
     </script>
