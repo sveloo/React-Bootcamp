@@ -49,6 +49,24 @@
       // The third should be a link to a React related resource of your choice
       // Make sure to include a key for each list item
 
+      function List() {
+        return (
+          <ul className="react-links" id="top">
+            <li>
+              <a href="https://reactjs.org/docs">React Docs</a>
+            </li>
+            <li>
+              <a href="https://reactjs.org/docs/react-dom.html">
+                React Dom Docs
+              </a>
+            </li>
+            <li>
+              <a href="https://reactjs.org/docs">React Docs</a>
+            </li>
+          </ul>
+        );
+      }
+
       // Practice #5
       // Create a component named "App"
       // Have it return a Fragment with the Header and List components inside of it
@@ -57,7 +75,8 @@
       ReactDOM.render(
         // Place your element or component here to test
         // pEl,
-        Header(),
+        // <Header />,
+        <List />,
         document.getElementById("root")
       );
     </script>
