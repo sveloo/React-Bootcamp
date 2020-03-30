@@ -72,11 +72,20 @@
       // Have it return a Fragment with the Header and List components inside of it
       // NOTE: The <> shorthand will not work with this demo, use <React.Fragment> for now
 
+      function App() {
+        return (
+          <React.Fragment>
+            <Header />
+            <List />
+          </React.Fragment>
+        );
+      }
+
       ReactDOM.render(
         // Place your element or component here to test
         // pEl,
         // <Header />,
-        <List />,
+        <App />,
         document.getElementById("root")
       );
     </script>
