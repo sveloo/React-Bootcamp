@@ -32,6 +32,14 @@
       // Have it return a header with an ID of "main"
       // Include h1LinkEl and pEl inside of the header element
 
+      function Header() {
+        return (
+          <header id="main">
+            {h1LinkEl} {pEl}
+          </header>
+        );
+      }
+
       // Practice #4
       // Create a component named "List"
       // Have it return an unordered list with a class of "react-links" and an ID of "top"
@@ -49,7 +57,7 @@
       ReactDOM.render(
         // Place your element or component here to test
         // pEl,
-        h1LinkEl,
+        Header(),
         document.getElementById("root")
       );
     </script>
