@@ -21,6 +21,12 @@
       // Use createElement to create an h1 element tag with a link inside of it
       // Make the link point to https://reactjs.org/ and include the text "React"
 
+      const H1LinkEl = React.createElement(
+        "h1",
+        {},
+        React.createElement("a", { href: "https://reactjs.org/" }, "React")
+      );
+
       // Practice #3
       // Create a component named "Header"
       // Have it return a header with an ID of "main"
@@ -40,7 +46,8 @@
 
       ReactDOM.render(
         // Place your element variable or component function call here to test
-        pEl,
+        // pEl,
+        H1LinkEl,
         document.getElementById("root")
       );
     </script>
