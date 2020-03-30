@@ -10,21 +10,23 @@
   <body>
     <div id="root"></div>
     <script>
+      const el = React.createElement;
+
       // Practice #1
       // Create a variable called pEl
       // Use createElement to create a paragraph element with text "Hello React."
 
-      const pEl = React.createElement("p", {}, "Hello React.");
+      const pEl = el("p", {}, "Hello React.");
 
       // Practice #2
       // Create a variable called h1LinkEl
       // Use createElement to create an h1 element tag with a link inside of it
       // Make the link point to https://reactjs.org/ and include the text "React"
 
-      const H1LinkEl = React.createElement(
+      const H1LinkEl = el(
         "h1",
         {},
-        React.createElement("a", { href: "https://reactjs.org/" }, "React")
+        el("a", { href: "https://reactjs.org/" }, "React")
       );
 
       // Practice #3
@@ -33,7 +35,7 @@
       // Include H1LinkEl and pEl inside of the header element
 
       function Header() {
-        return React.createElement("header", { id: "main" }, H1LinkEl, pEl);
+        return el("header", { id: "main" }, H1LinkEl, pEl);
       }
 
       // Practice #4
@@ -45,34 +47,30 @@
       // The third should be a link to a React related resource of your choice
 
       function List() {
-        return React.createElement(
+        return el(
           "ul",
           {
             id: "top",
             className: "react-links"
           },
-          React.createElement(
+          el(
             "li",
             {},
-            React.createElement(
-              "a",
-              { href: "https://reactjs.org/docs" },
-              "React Docs"
-            )
+            el("a", { href: "https://reactjs.org/docs" }, "React Docs")
           ),
-          React.createElement(
+          el(
             "li",
             {},
-            React.createElement(
+            el(
               "a",
               { href: "https://reactjs.org/docs/react-dom.html" },
               "React Dom Docs"
             )
           ),
-          React.createElement(
+          el(
             "li",
             {},
-            React.createElement(
+            el(
               "a",
               {
                 href: "https://www.seek.com.au/react-jobs/in-All-Melbourne-VIC"
@@ -88,7 +86,7 @@
       // Have it return a Fragment with the Header and List components inside of it
 
       function App() {
-        return React.createElement(React.Fragment, {}, Header(), List());
+        return el(React.Fragment, {}, Header(), List());
       }
 
       ReactDOM.render(
