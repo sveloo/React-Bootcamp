@@ -1,4 +1,4 @@
-<? php
+<?php
 /**
  * Template Name: React Template
  */
@@ -11,9 +11,7 @@ get_header();
 		<div class="post-inner thin">
 			<div class="entry-content">				
 
-				<div id="react-app"><?php
-echo wp_get_theme();
-?></div><!-- #react-app -->
+				<div id="react-app"></div><!-- #react-app -->
 
 			</div><!-- .entry-content -->
 		</div><!-- .post-inner -->

@@ -8,16 +8,19 @@ function my_theme_enqueue_styles() {
     
   wp_enqueue_style( 'child-style',
     get_stylesheet_directory_uri() . '/style.css',
-    [],
-    '1.0.0'
+    [ $parent_style ],
+    // time() //For production use wp_get_theme()->get('Version')
+    wp_get_theme()->get('Version')
   );
 
   wp_enqueue_script(
     'my-theme-frontend',
     get_stylesheet_directory_uri() . '/build/index.js',
-    [ 'wp-element' ],
-    '1.0.0',
-    true  
+    ['wp-element'],
+    // time() //For production use wp_get_theme()->get('Version')        
+    wp_get_theme()->get('Version')
   );
   
 }
+
+?>
