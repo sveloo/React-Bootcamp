@@ -1,4 +1,5 @@
 import React from "react";
+import User from "./components/User";
 
 const Practice5 = () => {
   const user = {
@@ -17,54 +18,6 @@ const Practice5 = () => {
       */}
       <User {...user} />
     </div>
-  );
-};
-
-/*
-  2. Destructure all of the props you will need 
-  3. Pass the firstName and lastName to <FullName />
-  4. Pass the username to <Username />
-  5. Pass the url and twitter to <Social />
-*/
-const User = ({ firstName, lastName, username, url, twitter }) => {
-  return (
-    <div className="user">
-      <FullName firstName={firstName} lastName={lastName} />
-      <Username username={username} />
-      <Social url={url} twitter={twitter} />
-    </div>
-  );
-};
-
-/*
-  6. Destructure the props needed
-*/
-const FullName = ({ firstName, lastName }) => (
-  <h1>
-    {firstName} {lastName}
-  </h1>
-);
-
-/*
-  7. Create a <Username /> component that displays the username
-*/
-
-const Username = ({ username }) => <p>{username}</p>;
-
-/*
-  8. Destructure the props you will need
-  9. Make the Website and Twitter links work based on props
-*/
-const Social = ({ twitter, url }) => {
-  return (
-    <ul className="social">
-      <li>
-        <a href={url}>Website</a>
-      </li>
-      <li>
-        <a href={`https://www.twitter.com/${twitter}`}>{twitter}</a>
-      </li>
-    </ul>
   );
 };
 
