@@ -3,7 +3,7 @@ import React from "react";
 class Practice5 extends React.Component {
   state = {
     goal: 10,
-    points: 0
+    points: 0,
   };
   timerID;
   componentDidMount() {
@@ -28,7 +28,7 @@ class Practice5 extends React.Component {
     return (
       <div>
         {this.state.points < this.state.goal ? (
-          <BarChart points={this.state.points} />
+          <BarChart points={this.state.points} stopTimer={this.stopTimer} />
         ) : (
           <h1 style={{ color: "green" }}>GOAL!!!</h1>
         )}
@@ -53,12 +53,16 @@ class BarChart extends React.Component {
     8. The call this.props.stopTimer(); to stop the timer from running
   */
 
+  componentWillUnmount() {
+    this.props.stopTimer();
+  }
+
   render() {
     const barStyles = {
       height: "100px",
       width: "50px",
       border: "1px #ccc solid",
-      position: "relative"
+      position: "relative",
     };
     const fillStyles = {
       height: `${this.props.points}0px`,
@@ -66,7 +70,7 @@ class BarChart extends React.Component {
       backgroundColor: "green",
       position: "absolute",
       bottom: "0",
-      transition: "height .6s"
+      transition: "height .6s",
     };
     return (
       <div className="bar" style={barStyles}>
@@ -76,7 +80,7 @@ class BarChart extends React.Component {
   }
 }
 
-const Controls = props => {
+const Controls = (props) => {
   if (props.points >= props.goal) {
     return <button onClick={props.resetPoints}>Start Over</button>;
   } else {
