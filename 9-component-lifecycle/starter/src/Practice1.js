@@ -4,7 +4,7 @@ const Practice1 = () => <Header sitename="React Explained" />;
 
 class Header extends React.Component {
   state = {
-    username: "defaultusername",
+    username: "defaultusername"
   };
   /* 
     1. Call static getDerivedStateFromProps(props, state) {}
@@ -14,10 +14,11 @@ class Header extends React.Component {
   */
 
   static getDerivedStateFromProps(props, state) {
-    console.log(props);
-    console.log(state);
+    console.log("Props", props);
+    console.log("State", state);
     const newState = {
-      username: "newusername",
+      sitename: "React Explained Again",
+      username: "sveloo"
     };
     return newState;
   }
