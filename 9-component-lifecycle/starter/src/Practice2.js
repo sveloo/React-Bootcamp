@@ -6,11 +6,11 @@ class Practice2 extends React.Component {
       {
         id: 0,
         title: {
-          rendered: "Default Post",
+          rendered: "Default Post"
         },
-        link: "http://www.google.com",
-      },
-    ],
+        link: "http://www.google.com"
+      }
+    ]
   };
   /* 
     1. Add the method componentDidMount()
@@ -21,9 +21,9 @@ class Practice2 extends React.Component {
   */
   componentDidMount() {
     fetch("https://dev-react-explained-api.pantheonsite.io/wp-json/wp/v2/posts")
-      .then((response) => response.json())
-      .then((posts) => this.setState({ posts }))
-      .catch((error) => console.error(error));
+      .then(response => response.json())
+      .then(posts => this.setState({ posts }))
+      .catch(error => console.error(error));
   }
 
   render() {
@@ -31,8 +31,8 @@ class Practice2 extends React.Component {
       <header>
         <h1>Posts</h1>
         <ul>
-          {this.state.posts.map((post) => (
-            <li key={post.id}>
+          {this.state.posts.map(post => (
+            <li className="list-item" key={post.id}>
               <a href={post.link}>{post.title.rendered}</a>
             </li>
           ))}
