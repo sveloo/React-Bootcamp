@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Practice2 = () => {
   /*
@@ -7,6 +7,9 @@ const Practice2 = () => {
    * 3. Add a button for each team to add one point
    * 4. Add an onClick event to the Reset button that sets both points to zero
    */
+
+  const [homePoints, setHomePoints] = useState(0);
+  const [awayPoints, setAwayPoints] = useState(0);
 
   return (
     <>
@@ -18,11 +21,24 @@ const Practice2 = () => {
           justifyContent: `space-between`,
         }}
       >
-        <h2>Home: POINTS</h2>
-        <h2>Away: POINTS</h2>
+        <h2>Home: {homePoints} POINTS</h2>
+        <h2>Away: {awayPoints} POINTS</h2>
       </div>
       <p>
-        <button>Reset Points</button>
+        <button onClick={() => setHomePoints(homePoints + 1)}>
+          Add Home Point
+        </button>
+        <button onClick={() => setAwayPoints(awayPoints + 1)}>
+          Add Away Point
+        </button>
+        <button
+          onClick={() => {
+            setHomePoints(0);
+            setAwayPoints(0);
+          }}
+        >
+          Reset Points
+        </button>
       </p>
     </>
   );
