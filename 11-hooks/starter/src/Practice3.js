@@ -15,7 +15,7 @@ const Practice3 = () => {
     fetch(url)
       .then((response) => response.json())
       .then((catImg) => {
-        setCatImg(catImg);
+        setCatImg(catImg.file);
       })
       .catch((error) => console.error(error));
   };
@@ -29,11 +29,8 @@ const Practice3 = () => {
   return (
     <>
       <h1>Random Cat Photo</h1>
-      <img src={catImg.file} alt="Random Cat Image" width="500" />
-      <h2>
-        Url: <a href={url}>{url}</a>
-      </h2>
-      <button onClick={fetchPosts}>Load New Cat</button>
+      <img src={catImg} alt="Random Cat Image" width="500" />
+      <h2>{catImg}</h2>
     </>
   );
 };
