@@ -3,18 +3,17 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
 import WelcomeMessage from "./WelcomeMessage";
+import UserContext from "../context/UserContext";
 
 class SignUpForm extends React.Component {
-  state = {
-    user: {},
-  };
+  static contextType = UserContext;
 
   updateUser = (event) => {
     const value = event.target.value;
     const field = event.target.id;
     const user = this.state.user;
     user[field] = value;
-    this.setState(user);
+    this.context.updateUser(user);
   };
 
   currentStep = ({ step, updateStep }) => {

@@ -6,7 +6,7 @@ import MainContent from "./components/MainContent";
 import SignUpForm from "./components/SignUpForm";
 import Footer from "./components/Footer";
 import ProgressBar from "./components/ProgressBar";
-import UserContext from "./context/user-context";
+import UserContext from "./context/UserContext";
 import "./App.css";
 
 class App extends React.Component {
