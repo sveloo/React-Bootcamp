@@ -7,6 +7,7 @@ import SignUpForm from "./components/SignUpForm";
 import Footer from "./components/Footer";
 import ProgressBar from "./components/ProgressBar";
 import UserContext from "./context/UserContext";
+import FormContext from "./context/FormContext";
 import "./App.css";
 
 class App extends React.Component {
@@ -32,20 +33,24 @@ class App extends React.Component {
             updateUser: this.updateUser,
           }}
         >
-          <Header>
-            <NavBar>
-              Signup Steps:
-              <NavBarStep step="1" />
-              <NavBarStep step="2" />
-              <NavBarStep step="3" />
-            </NavBar>
-          </Header>
-          <MainContent>
-            <SignUpForm />
-          </MainContent>
-          <Footer>
-            <ProgressBar />
-          </Footer>
+          <FormContext.Provider
+            value={{ step: this.state.step, updateStep: this.updateStep }}
+          >
+            <Header>
+              <NavBar>
+                Signup Steps:
+                <NavBarStep step="1" />
+                <NavBarStep step="2" />
+                <NavBarStep step="3" />
+              </NavBar>
+            </Header>
+            <MainContent>
+              <SignUpForm />
+            </MainContent>
+            <Footer>
+              <ProgressBar />
+            </Footer>
+          </FormContext.Provider>
         </UserContext.Provider>
       </div>
     );

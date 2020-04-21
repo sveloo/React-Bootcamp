@@ -4,6 +4,7 @@ import Step2 from "./Step2";
 import Step3 from "./Step3";
 import WelcomeMessage from "./WelcomeMessage";
 import UserContext from "../context/UserContext";
+import FormContext from "../context/FormContext";
 
 class SignUpForm extends React.Component {
   static contextType = UserContext;
@@ -11,7 +12,7 @@ class SignUpForm extends React.Component {
   updateUser = (event) => {
     const value = event.target.value;
     const field = event.target.id;
-    const user = this.state.user;
+    const user = this.context.user;
     user[field] = value;
     this.context.updateUser(user);
   };
@@ -21,7 +22,7 @@ class SignUpForm extends React.Component {
       case `1`:
         return (
           <Step1
-            user={this.state.user}
+            user={this.context.user}
             updateUser={this.updateUser}
             nextStep="2"
           />
@@ -29,7 +30,7 @@ class SignUpForm extends React.Component {
       case `2`:
         return (
           <Step2
-            user={this.state.user}
+            user={this.context.user}
             updateUser={this.updateUser}
             nextStep="3"
           />
@@ -37,7 +38,7 @@ class SignUpForm extends React.Component {
       case `3`:
         return (
           <Step3
-            user={this.state.user}
+            user={this.context.user}
             updateUser={this.updateUser}
             nextStep="completed"
           />
@@ -54,7 +55,13 @@ class SignUpForm extends React.Component {
   };
 
   render() {
-    return <form>{this.currentStep({ step: `1`, updateStep: () => {} })}</form>;
+    return (
+      <form>
+        <FormContext.Consumer>
+          {(context) => this.currentStep(context)}
+        </FormContext.Consumer>
+      </form>
+    );
   }
 }
 

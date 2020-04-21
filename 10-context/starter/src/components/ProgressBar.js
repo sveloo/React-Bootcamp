@@ -1,8 +1,11 @@
 import React from "react";
+import FormContext from "../context/FormContext";
 
 class ProgressBar extends React.Component {
+  static contextType = FormContext;
+
   getPercent = () => {
-    switch (this.props.step) {
+    switch (this.context.step) {
       case `2`:
         return 33;
       case `3`:
