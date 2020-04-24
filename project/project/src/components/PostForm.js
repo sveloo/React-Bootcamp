@@ -5,25 +5,43 @@ import "react-quill/dist/quill.snow.css";
 
 class PostForm extends Component {
   state = {
-    title: "",
-    content: "",
+    post: {
+      id: this.props.post.id,
+      slug: this.props.post.slug,
+      title: this.props.post.title,
+      content: this.props.post.content,
+    },
     saved: false,
   };
 
   handlePostForm = (e) => {
     e.preventDefault();
-    if (this.state.title) {
-      const post = {
-        title: this.state.title,
-        content: this.state.content,
-      };
-      this.props.addNewPost(post);
+    if (this.state.post.title) {
+      if (this.props.updatePost) {
+        this.props.updatePost(this.state.post);
+      } else {
+        this.props.addNewPost(this.state.post);
+      }
       this.setState({ saved: true });
-      console.log(post);
     } else {
       alert("Title required");
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.post.id !== this.props.post.id) {
+      this.setState({
+        post: {
+          id: this.props.post.id,
+          slug: this.props.post.slug,
+          title: this.props.post.title,
+          content: this.props.post.content,
+        },
+      });
+      const quillEditor = document.querySelector(".ql-editor");
+      quillEditor.innerHTML = "";
+    }
+  }
 
   render() {
     if (this.state.saved === true) {
@@ -36,17 +54,28 @@ class PostForm extends Component {
           <label htmlFor="form-title">Title:</label>
           <br />
           <input
+            defaultValue={this.props.title}
             id="form-title"
-            value={this.state.title}
-            onChange={(e) => this.setState({ title: e.target.value })}
+            value={this.state.post.title}
+            onChange={(e) =>
+              this.setState({
+                post: { ...this.state.post, title: e.target.value },
+              })
+            }
           />
         </p>
 
         <label htmlFor="form-content">Content:</label>
         <br />
         <Quill
+          defaultValue={this.state.post.content}
           onChange={(content, delta, source, editor) => {
-            this.setState({ content: editor.getContents() });
+            this.setState({
+              post: {
+                ...this.state.post,
+                content: editor.getContents(),
+              },
+            });
           }}
         />
 
