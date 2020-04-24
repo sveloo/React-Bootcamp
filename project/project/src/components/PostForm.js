@@ -41,15 +41,15 @@ class PostForm extends Component {
             onChange={(e) => this.setState({ title: e.target.value })}
           />
         </p>
-        <p>
-          <label htmlFor="form-content">Content:</label>
-          <br />
-          <Quill
-            onChange={(content, delta, source, editor) => {
-              this.setState({ content: editor.getContents() });
-            }}
-          />
-        </p>
+
+        <label htmlFor="form-content">Content:</label>
+        <br />
+        <Quill
+          onChange={(content, delta, source, editor) => {
+            this.setState({ content: editor.getContents() });
+          }}
+        />
+
         <p>
           <button type="submit">Save</button>
         </p>

@@ -10,31 +10,14 @@ import Posts from "./components/Posts";
 import Post from "./components/Post";
 import NotFound from "./components/NotFound";
 import PostForm from "./components/PostForm";
+import Message from "./components/Message";
 
 import "./App.css";
 
 class App extends Component {
   state = {
-    posts: [
-      {
-        id: 1,
-        slug: "hello-react",
-        title: "Hello React",
-        content: "Lorem.",
-      },
-      {
-        id: 2,
-        slug: "hello-project",
-        title: "Hello Project",
-        content: "To the.",
-      },
-      {
-        id: 3,
-        slug: "hello-blog",
-        title: "Hello Blog",
-        content: "Ipsum.",
-      },
-    ],
+    posts: [],
+    message: null,
   };
 
   addNewPost = (post) => {
@@ -44,7 +27,11 @@ class App extends Component {
     );
     this.setState({
       posts: [...this.state.posts, post],
+      message: "saved",
     });
+    setTimeout(() => {
+      this.setState({ message: null });
+    }, 1600);
   };
 
   render() {
@@ -52,6 +39,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
+          {this.state.message && <Message type={this.state.message} />}
           <Switch>
             <Route
               exact
