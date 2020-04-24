@@ -7,6 +7,9 @@ const Header = (props) => (
       <li>
         <Link to={`/`}>Site Title</Link>
       </li>
+      <li>
+        <Link to={`/new`}>New Post</Link>
+      </li>
     </ul>
   </header>
 );

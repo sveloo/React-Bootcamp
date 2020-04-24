@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Posts from "./components/Posts";
 import Post from "./components/Post";
 import NotFound from "./components/NotFound";
+import PostForm from "./components/PostForm";
 
 import "./App.css";
 
@@ -36,6 +37,16 @@ class App extends Component {
     ],
   };
 
+  addNewPost = (post) => {
+    post.id = this.state.posts.length + 1;
+    post.slug = encodeURIComponent(
+      post.title.toLowerCase().split(" ").join("-")
+    );
+    this.setState({
+      posts: [...this.state.posts, post],
+    });
+  };
+
   render() {
     return (
       <Router>
@@ -46,6 +57,11 @@ class App extends Component {
               exact
               path="/"
               render={() => <Posts posts={this.state.posts} />}
+            />
+            <Route
+              exact
+              path="/new"
+              render={() => <PostForm addNewPost={this.addNewPost} />}
             />
             <Route
               path="/posts/:postSlug"
