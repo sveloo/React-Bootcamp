@@ -26,6 +26,23 @@ class App extends Component {
     message: null,
   };
 
+  componentDidMount() {
+    const postRef = firebase.database().ref("posts");
+    postRef.on("value", (snapshot) => {
+      const posts = snapshot.val();
+      const newStatePosts = [];
+      for (let post in posts) {
+        newStatePosts.push({
+          key: post,
+          slug: posts[post].slug,
+          title: posts[post].title,
+          content: posts[post].content,
+        });
+      }
+      this.setState({ posts: newStatePosts });
+    });
+  }
+
   onLogin = (email, password) => {
     firebase
       .auth()
@@ -46,10 +63,11 @@ class App extends Component {
     encodeURIComponent(title.toLowerCase().split(" ").join("-"));
 
   addNewPost = (post) => {
-    post.id = this.state.posts.length + 1;
+    const postsRef = firebase.database().ref("posts");
     post.slug = this.getNewSlugFromTitle(post.title);
+    delete post.key;
+    postsRef.push(post);
     this.setState({
-      posts: [...this.state.posts, post],
       message: "saved",
     });
     setTimeout(() => {
@@ -58,16 +76,14 @@ class App extends Component {
   };
 
   updatePost = (post) => {
-    post.slug = this.getNewSlugFromTitle(post.title);
-    const index = this.state.posts.findIndex((p) => p.id === post.id);
-    const posts = this.state.posts
-      .slice(0, index)
-      .concat(this.state.posts.slice(index + 1));
-    const newPosts = [...posts, post].sort((a, b) => a.id - b.id);
-    this.setState({
-      posts: newPosts,
-      message: "updated",
+    const postRef = firebase.database().ref("posts/" + post.key);
+    postRef.update({
+      key: post.key,
+      slug: this.getNewSlugFromTitle(post.title),
+      title: post.title,
+      content: post.content,
     });
+    this.setState({ message: "updated" });
     setTimeout(() => {
       this.setState({ message: null });
     }, 1600);
@@ -75,8 +91,9 @@ class App extends Component {
 
   deletePost = (post) => {
     if (window.confirm("Delete this post?")) {
-      const posts = this.state.posts.filter((p) => p.id !== post.id);
-      this.setState({ posts, message: "deleted" });
+      const postRef = firebase.database().ref("posts/" + post.key);
+      postRef.remove();
+      this.setState({ message: "deleted" });
       setTimeout(() => {
         this.setState({ message: null });
       }, 1600);
@@ -136,7 +153,7 @@ class App extends Component {
                 this.state.isAuthenticated ? (
                   <PostForm
                     addNewPost={this.addNewPost}
-                    post={{ id: 0, slug: "", title: "", content: "" }}
+                    post={{ key: null, slug: "", title: "", content: "" }}
                   />
                 ) : (
                   <Redirect to="/login" />
