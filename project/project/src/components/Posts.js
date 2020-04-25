@@ -7,7 +7,7 @@ const Posts = ({ posts, deletePost, isAuthenticated }) => (
     <ul>
       {posts.length < 1 && <li key="empty">There are no posts!</li>}
       {posts.map((post) => (
-        <li key={post.id}>
+        <li key={post.key}>
           <Link to={`/posts/${post.slug}`}>
             <h2>{post.title}</h2>
           </Link>
